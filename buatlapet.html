@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Kamu ❤️</title>
+    
+    <!-- Impor Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Impor SweetAlert2 untuk notifikasi pop-up yang cantik -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* Menggunakan font Google 'Poppins' untuk tampilan yang lebih modern */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="text-center p-8 bg-white rounded-xl shadow-lg max-w-sm mx-auto">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4">Hai Sayang!</h1>
+        <p class="text-gray-600 mb-6">Aku punya pesan spesial buat kamu. Klik tombol di bawah ya.</p>
+        
+        <!-- Tombol untuk memulai rangkaian pesan romantis -->
+        <button id="mulaiPesan" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-opacity-75">
+            Klik Aku Dong!
+        </button>
+    </div>
+
+    <script>
+        // Menambahkan event listener ke tombol untuk memulai pesan saat diklik
+        document.getElementById('mulaiPesan').addEventListener('click', function() {
+            // Rangkaian pesan SweetAlert yang akan ditampilkan secara berurutan
+            Swal.fire({
+                title: 'Hai Kamu!',
+                text: 'Aku cuma mau bilang sesuatu nih...',
+                icon: 'info',
+                confirmButtonText: 'Apa itu?',
+                confirmButtonColor: '#f472b6'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Sebelumnya, aku mau tanya',
+                        text: 'Kamu sayang ga sama aku?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'Sayang Banget!',
+                        cancelButtonText: 'Nggak!',
+                        confirmButtonColor: '#f472b6',
+                        cancelButtonColor: '#6b7280',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: 'Hehe, aku juga sayang banget sama kamu!',
+                                html: 'Makasih ya udah mau jadi bagian terpenting di hidup aku. Kamu itu alasanku buat selalu tersenyum setiap hari. ❤️',
+                                icon: 'success',
+                                confirmButtonText: 'Lanjut...',
+                                confirmButtonColor: '#f472b6'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                     Swal.fire({
+                                        imageUrl: 'https://i.pinimg.com/originals/e7/3a/8b/e73a8b76a6a0a8677f98e8210b37803a.gif', // URL gambar/gif romantis
+                                        imageHeight: 200,
+                                        title: 'I Love You So Much!',
+                                        text: 'Jaga diri baik-baik ya, Sayang.',
+                                        confirmButtonText: 'I Love You Too!',
+                                        confirmButtonColor: '#f472b6'
+                                    });
+                                }
+                            });
+                        } else {
+                            // Pesan jika pengguna memilih "Nggak!"
+                            Swal.fire({
+                                imageUrl: 'https://i.pinimg.com/originals/d9/3c/6a/d93c6a38615b399b5a329d79a2955c48.gif', // URL gambar/gif sedih
+                                imageHeight: 200,
+                                title: 'Yahh :(',
+                                text: 'Bohong! Aku tau kamu sayang kok, hehe.',
+                                confirmButtonColor: '#f472b6'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

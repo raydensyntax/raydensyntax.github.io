@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gombalan Romantis</title>
+    
+    <!-- Memuat Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Memuat SweetAlert2 untuk pop-up cantik -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* Custom font untuk tampilan yang lebih menarik */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+        }
+
+        .button-glow {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px 0 rgba(252, 109, 169, 0.75);
+        }
+
+        .button-glow:hover {
+            box-shadow: 0 6px 20px 0 rgba(252, 109, 169, 1);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-200 to-rose-300 min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md mx-auto bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 text-center">
+        <!-- Judul Halaman -->
+        <h1 class="text-4xl text-rose-500 mb-2">Buat Lapet</h1>
+        <p class="text-gray-600 mb-8">semoga ini ngena ❤️</p>
+
+        <!-- Container untuk Tombol-tombol -->
+        <div class="grid grid-cols-1 gap-4">
+            <button onclick="gombalan1()" class="button-glow w-full bg-rose-500 text-white font-bold py-3 px-4 rounded-xl focus:outline-none focus:shadow-outline">
+                Gombalan #1
+            </button>
+            <button onclick="gombalan2()" class="button-glow w-full bg-rose-500 text-white font-bold py-3 px-4 rounded-xl focus:outline-none focus:shadow-outline">
+                Gombalan #2
+            </button>
+            <button onclick="gombalan3()" class="button-glow w-full bg-rose-500 text-white font-bold py-3 px-4 rounded-xl focus:outline-none focus:shadow-outline">
+                Gombalan #3
+            </button>
+            <button onclick="gombalan4()" class="button-glow w-full bg-rose-500 text-white font-bold py-3 px-4 rounded-xl focus:outline-none focus:shadow-outline">
+                Gombalan #4
+            </button>
+            <button onclick="gombalan5()" class="button-glow w-full bg-rose-500 text-white font-bold py-3 px-4 rounded-xl focus:outline-none focus:shadow-outline">
+                Gombalan #5
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan gombalan pertama
+        function gombalan1() {
+            Swal.fire({
+                title: 'Kalau hatiku itu playlist Spotify...',
+                text: '...isinya bakal cuma satu artis: kamu. Dan semua lagunya bakal aku putar berulang-ulang tanpa bosan.',
+                icon: 'success',
+                confirmButtonText: 'Putar terus ya!',
+                confirmButtonColor: '#f43f5e'
+            });
+        }
+
+        // Fungsi untuk menampilkan gombalan kedua
+        function gombalan2() {
+            Swal.fire({
+                title: 'Kamu itu seperti tombol spasi.',
+                text: 'Kelihatannya sederhana, tapi tanpamu... semua terasa terlalu rapat, sempit, dan nggak ada jeda buat bernapas.',
+                icon: 'success',
+                confirmButtonText: 'Wah, dalem...',
+                confirmButtonColor: '#f43f5e'
+            });
+        }
+
+        // Fungsi untuk menampilkan gombalan ketiga
+        function gombalan3() {
+            Swal.fire({
+                title: 'Aku bukan mau jadi senja...',
+                text: '...yang indahnya cuma sesaat. Aku maunya jadi pagi, yang selalu datang lagi untuk memulai hari baru bersamamu.',
+                icon: 'success',
+                confirmButtonText: 'Aku tungguin tiap pagi!',
+                confirmButtonColor: '#f43f5e'
+            });
+        }
+        
+        // Fungsi untuk menampilkan gombalan keempat
+        function gombalan4() {
+            Swal.fire({
+                title: 'Tahu nggak apa persamaan kamu sama bug di kodeku?',
+                text: 'Sama-sama bikin aku terjaga semalaman. Bedanya, kalau bug bikin pusing, kamu bikin aku senyum-senyum sendiri.',
+                icon: 'success',
+                confirmButtonText: 'Programmer ya?',
+                confirmButtonColor: '#f43f5e'
+            });
+        }
+
+        // Fungsi untuk menampilkan gombalan kelima
+        function gombalan5() {
+            Swal.fire({
+                title: 'Orang bilang rumah itu bangunan.',
+                text: 'Buatku, rumah itu adalah saat aku bisa dengar tawamu. Di manapun itu, selama sama kamu, di situlah aku merasa pulang.',
+                icon: 'success',
+                confirmButtonText: 'Selamat datang di rumah!',
+                confirmButtonColor: '#f43f5e'
+            });
+        }
+    </script>
+
+</body>
+</html>
