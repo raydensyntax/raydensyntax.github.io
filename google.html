@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Sederhana</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for WebKit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2d3748; /* Darker gray for track */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568; /* Even darker gray for thumb */
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280; /* Lighter gray on hover */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif; /* Use Inter font */
+            background-color: #1a202c; /* Dark background for the body */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px; /* Add some padding around the terminal */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+
+        .terminal-container {
+            width: 100%;
+            max-width: 800px; /* Max width for larger screens */
+            height: 600px; /* Fixed height for the terminal */
+            background-color: #2d3748; /* Dark background */
+            border-radius: 0.75rem; /* Rounded corners */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Hide overflow content */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        }
+
+        .terminal-output {
+            flex-grow: 1; /* Allow output area to grow */
+            padding: 1rem;
+            color: #e2e8f0; /* Light gray text */
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* Monospaced font */
+            overflow-y: auto; /* Enable vertical scrolling */
+            white-space: pre-wrap; /* Preserve whitespace and wrap text */
+            word-break: break-all; /* Break words at any character */
+        }
+
+        .terminal-input-wrapper {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-top: 1px solid #4a5568; /* Separator line */
+            background-color: #1a202c; /* Input background */
+        }
+
+        .terminal-prompt {
+            color: #48bb78; /* Green prompt color */
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            margin-right: 0.5rem;
+        }
+
+        .terminal-input {
+            flex-grow: 1;
+            background-color: transparent; /* Transparent background */
+            border: none; /* No border */
+            color: #e2e8f0; /* Light gray text */
+            outline: none; /* Remove outline on focus */
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="terminal-output" id="terminalOutput">
+            <!-- Initial welcome message -->
+            <span style="color: #48bb78;">TERMINAL LINUX : SCRAPING.......</span><br>
+            <span style="color: #63b3ed;">WhatsApp - Facebook - Instagram - Discord - Threads</span><br><br>
+        </div>
+        <div class="terminal-input-wrapper">
+            <span class="terminal-prompt">$</span>
+            <input type="text" class="terminal-input" id="terminalInput" autofocus>
+        </div>
+    </div>
+
+    <script>
+        // Get references to DOM elements
+        const terminalOutput = document.getElementById('terminalOutput');
+        const terminalInput = document.getElementById('terminalInput');
+        let runningIndicator = null; // To store the running indicator element
+
+        // Function to add a line to the terminal output
+        function addLineToOutput(line, color = '#e2e8f0') { // Default color is light gray
+            const p = document.createElement('div');
+            p.innerHTML = line; // Use innerHTML to allow for styled spans
+            p.style.color = color;
+            terminalOutput.appendChild(p);
+            // Scroll to the bottom
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+
+        // Handle input when 'Enter' key is pressed
+        terminalInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const command = terminalInput.value.trim(); // Get trimmed command
+                addLineToOutput(`<span style="color: #48bb78;">$</span> ${command}`); // Display the entered command
+
+                // Display "Running command..." indicator
+                runningIndicator = document.createElement('div');
+                runningIndicator.innerHTML = '<span style="color: #a0aec0;">Sedang menjalankan kode...</span>';
+                terminalOutput.appendChild(runningIndicator);
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+
+                // Process the command with a slight delay to simulate processing time
+                setTimeout(() => {
+                    processCommand(command);
+                    // Remove the running indicator after processing
+                    if (runningIndicator && terminalOutput.contains(runningIndicator)) {
+                        terminalOutput.removeChild(runningIndicator);
+                    }
+                }, 300); // 300ms delay
+
+                terminalInput.value = ''; // Clear the input field
+            }
+        });
+
+        // Function to process commands
+        function processCommand(command) {
+            const parts = command.split(' ');
+            const mainCommand = parts[0].toLowerCase(); // Get the main command
+
+            switch (mainCommand) {
+                case 'help':
+                
+                    addLineToOutput('  <span style="color: #a0aec0;">............................................</span>');
+                    break;
+                case 'clear':
+                    terminalOutput.innerHTML = ''; // Clear all content
+                    break;
+                case 'echo':
+                    const echoText = parts.slice(1).join(' '); // Get text after 'echo'
+                    addLineToOutput(echoText, '#cbd5e0'); // Display echo text
+                    break;
+                case 'date':
+                    const currentDate = new Date();
+                    addLineToOutput(currentDate.toLocaleString(), '#90cdf4'); // Display current date/time
+                    break;
+                case 'about':
+                    addLineToOutput('TERMINAL LINUX : SCRAPING.......', '#81e6d9');
+                    addLineToOutput('WhatsApp - Facebook - Instagram - Discord - Threads', '#81e6d9');
+                    break;
+                case 'tapwa':
+                    addLineToOutput('<span style="color: #ffcc00;">Memulai proses penyadapan WhatsApp...</span>');
+                    addLineToOutput('<span style="color: #ffcc00;">Peringatan: Pastikan PROXY running..........</span>', '#ff6600');
+                    setTimeout(() => {
+                        addLineToOutput('<span style="color: #00ff00;">[STATUS] Mencari koneksi aman...</span>');
+                    }, 1000);
+                    setTimeout(() => {
+                        addLineToOutput('<span style="color: #00ff00;">[STATUS] Mengenkripsi saluran data...</span>');
+                    }, 2000);
+                    setTimeout(() => {
+                        addLineToOutput('<span style="color: #00ff00;">[STATUS] Menghubungkan ke server proxy...</span>');
+                    }, 3000);
+                    setTimeout(() => {
+                        addLineToOutput('<span style="color: #00ff00;">[STATUS] Mengambil metadata WhatsApp...</span>');
+                    }, 4500);
+                    setTimeout(() => {
+                        addLineToOutput('<span style="color: #00ff00;">[STATUS] Memulai aliran data...</span>');
+                    }, 6000);
+                    setTimeout(() => {
+                        addLineToOutput('<span style="color: #00ff00;">[INFO]Penyadapan selesai. Data yang ditampilkan adalah yang terbaru.</span>');
+                        addLineToOutput('<span style="color: #00ff00;">------------------------------------------------</span>');
+                        addLineToOutput('<span style="color: #00ff00;">[DATA] Pesan dari (My wife) +62812xxxxxx: "by, udh di rumah ya?"</span>');
+                        addLineToOutput('<span style="color: #00ff00;">[DATA] Pesan dari (Anongggg) +62878xxxxxx: "capekkkkkkk woiiiii!"</span>');
+                        addLineToOutput('<span style="color: #00ff00;">[DATA] Panggilan masuk dari (Emonnn ml.) +62812xxxxxx</span>');
+                        addLineToOutput('<span style="color: #00ff00;">[DATA] Panggilan masuk dari (Kak naura) +62812xxxxxx</span>');
+                        addLineToOutput('<span style="color: #00ff00;">[DATA] Pesan dari +62853xxxxxx: "udah lama 2023an...."</span>');
+                        addLineToOutput('<span style="color: #00ff00;">[DATA] Pesan dari (syahrul pokpok) +62858xxxxxx: "ayang udh mam blm?"</span>');
+                        addLineToOutput('<span style="color: #00ff00;">[DATA] Pesan dari (Gandhiii) +62856xxxxxx: "lahhh kok bisa lohhhh?</span>');
+                                                addLineToOutput('<span style="color: #00ff00;">[DATA] Panggilan tak terjawab dari (Kak naura) +62812xxxxxx</span>');
+                                                addLineToOutput('<span style="color: #00ff00;">------------------------------------------------</span>');
+                                                      addLineToOutput('<span style="color: #00ff00;">[INFO] SEMUA DATA SUDAH TERSIMPAN DI KOMPUTERMU</span>');
+                                                            addLineToOutput('<span style="color: #00ff00;">------------------------------------------------</span>');
+                    }, 12000);
+                    break;
+                case '': // If nothing is typed, just show a new line
+                    break;
+                default:
+                    addLineToOutput(`[+] PERINTAH ${command} SUKSES.......`, '#00ff00'); // Error message for unknown commands
+                    break;
+            }
+        }
+
+        // Focus on the input field when the page loads
+        window.onload = function() {
+            terminalInput.focus();
+        };
+    </script>
+</body>
+</html>
